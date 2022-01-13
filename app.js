@@ -20,6 +20,9 @@ function main () {
     ////////////////
 
     const renderer = new THREE.WebGLRenderer({canvas})
+
+    // Finally, add here the instance for Orbital Controls
+    new THREE.OrbitControls(camera, canvas)
    
     ////////////////
     // SCENE SETUP
@@ -29,10 +32,10 @@ function main () {
     const loader = new THREE.TextureLoader()
 
     const texture = loader.load(
-        'https://threejs.org/manual/examples/resources/images/equirectangularmaps/tears_of_steel_bridge_2k.jpg',
+        'https://dl.polyhaven.org/file/ph-assets/HDRIs/extra/Tonemapped%20JPG/snowy_field.jpg',
         () => {
             const rt = new THREE.WebGLCubeRenderTarget(texture.image.height)
-            rt.fromEquiRectangularTexture(renderer, texture)
+            rt.fromEquirectangularTexture(renderer, texture)
             scene.background = rt.texture
         }
     )
